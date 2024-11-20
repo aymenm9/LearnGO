@@ -15,8 +15,25 @@ func main() {
 		*ptr = int8(i)
 	}
 	fmt.Println(arrPtr)
+	var head *node = nil
+	for i := 0; i < len(arrPtr); i++ {
+		head = appendElment(arrPtr[i]+1, head)
+	}
+	printList(head)
+}
+func creatElement(val int8) node {
+	return node{val, nil}
+}
+func appendElment(v int8, h *node) *node {
+	n := creatElement(v)
+	n.next = h
+	return &n
 }
 
-/*func creatList(val int8) node {
-	return node{val, nil}
-}*/
+func printList(h *node) {
+	if h == nil {
+		return
+	}
+	printList(h.next)
+	fmt.Println(h.val)
+}
